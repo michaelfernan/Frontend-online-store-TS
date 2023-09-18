@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import ProductList from '../components/ProductList';
+import { getProductsFromSearch } from '../services/api';
 
 function Home() {
   const [searchInputValue, setSearchInputValue] = useState('');
   const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+  const [productList, setProductList] = useState([]);
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    setIsSearchEmpty(false);
+    const searchResult = await getProductsFromSearch(searchInputValue);
+    setProductList(searchResult);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchInputValue(value);
+  };
 
   return (
     <div>
@@ -15,6 +26,7 @@ function Home() {
           <label htmlFor="search">
             <input
               data-testid="query-input"
+              onChange={ handleChange }
               type="text"
               id="search"
               name="searchTerm"
@@ -40,7 +52,7 @@ function Home() {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) : (
-          <ProductList toBeQueried={ searchInputValue } />
+          <ProductList productList={ productList } />
         )}
       </div>
     </div>

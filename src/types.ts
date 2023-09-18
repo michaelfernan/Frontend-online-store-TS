@@ -1,6 +1,5 @@
 export type ProductCardTypes = {
-  productName:string,
-  imageSrc:string,
-  imgAltText:string,
-  productPrice:string
+  productName: string,
+  imageSrc: string,
+  productPrice: number
 };
