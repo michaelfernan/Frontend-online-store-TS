@@ -1,3 +1,7 @@
+import { NavLink } from 'react-router-dom';
+import SearchIcon from '../Images/SearchIcon';
+import CartIcon from '../Images/CartIcon';
+
 function Home() {
   return (
     <div>
@@ -8,7 +12,11 @@ function Home() {
           <input type="text" id="search" name="searchTerm" />
 
           {/* Botão de envio */}
-          <button type="submit">Pesquisar</button>
+          <button
+            type="button"
+          >
+            <SearchIcon />
+          </button>
         </form>
       </div>
       <div>
@@ -17,6 +25,16 @@ function Home() {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
       </div>
+      {/* Botão/Link de carrinho de compras */}
+      <NavLink
+        to="/cart"
+        data-testid="shopping-cart-button"
+      >
+        <button type="button">
+          <CartIcon />
+        </button>
+      </NavLink>
+
     </div>
   );
 }
