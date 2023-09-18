@@ -4,6 +4,13 @@ export type ProductCardTypes = {
   productPrice: string
 };
 
+export type ProductTypes = {
+  id: string,
+  title: string,
+  thumbnail:string,
+  price: number
+};
+
 export type ProductListTypes = {
-  productList: []
+  productList: ProductTypes[]
 };
