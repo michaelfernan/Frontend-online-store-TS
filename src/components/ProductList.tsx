@@ -5,9 +5,10 @@ export default function ProductList({ productList }: ProductListTypes) {
   return (
     <div>
       <h1> Lista de Produtos</h1>
-      {productList.map(({ title, thumbnail, price }) => {
+      {productList.map(({ id, title, thumbnail, price }) => {
         return (
           <ProductCard
+            key={ id }
             productName={ title }
             imageSrc={ thumbnail }
             productPrice={ `R$ ${price}` }
