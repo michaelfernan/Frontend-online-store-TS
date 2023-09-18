@@ -25,7 +25,6 @@ function Home() {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
       </div>
-      
       {/* Botão/Link de carrinho de compras */}
       <NavLink
         to="/cart"
