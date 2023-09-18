@@ -12,6 +12,7 @@ function Home() {
     const searchResult = await getProductsFromSearch(searchInputValue);
     setIsSearchEmpty(false);
     setProductList(searchResult.results);
+    setSearchInputValue('');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
