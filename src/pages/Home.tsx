@@ -45,13 +45,12 @@ function Home() {
   };
 
   return (
-    <div>
-      <div>
+    <>
+      <header>
         <form>
           {/* Etiqueta e campo de entrada */}
           <label htmlFor="search">
             <input
-
               onChange={ handleChange }
               type="text"
               id="search"
@@ -59,51 +58,56 @@ function Home() {
               value={ searchInputValue }
             />
           </label>
-          <ul>
-            {categories.map((category) => (
-              <li key={ category.id } data-testid="category">
-                <Link to={ `/search?category=${category.id}` }>{category.name}</Link>
-              </li>
-            ))}
-          </ul>
-
           {/* Botão de envio */}
-          <button
-            type="button"
-          >
-            <SearchIcon />
-          </button>
           <button
             data-testid="query-button"
             type="submit"
             onClick={ handleSubmit }
           >
-            Pesquisar
-
+            <SearchIcon />
           </button>
         </form>
-      </div>
-      <div>
+        <div>
+          <h1>FRONT-END</h1>
+          <h3>online store</h3>
+        </div>
+        <NavLink
+          to="/cart"
+          data-testid="shopping-cart-button"
+        >
+          <button type="button">
+            <CartIcon />
+          </button>
+        </NavLink>
+      </header>
+
+      <aside>
+        <h2>Categorias</h2>
+        <ul>
+          {categories.map((category) => (
+            <li key={ category.id } data-testid="category">
+              <Link to={ `/search?category=${category.id}` }>{category.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      <main>
         {isSearchEmpty ? (
         /* Mensagem inicial */
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
+          <div>
+            <p>VOCÊ AINDA NÃO REALIZOU UMA BUSCA</p>
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          </div>
         ) : (
           <ProductList productList={ productList } />
         )}
-      </div>
+      </main>
       {/* Botão/Link de carrinho de compras */}
-      <NavLink
-        to="/cart"
-        data-testid="shopping-cart-button"
-      >
-        <button type="button">
-          <CartIcon />
-        </button>
-      </NavLink>
 
-    </div>
+    </>
   );
 }
 
