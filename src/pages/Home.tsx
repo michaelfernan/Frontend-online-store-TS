@@ -1,8 +1,30 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import SearchIcon from '../Images/SearchIcon';
 import CartIcon from '../Images/CartIcon';
+import { getCategories } from '../services/api';
+
+type Category = {
+  id: string;
+  name: string;
+};
 
 function Home() {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error('Erro ao buscar categorias:', error);
+      }
+    }
+
+    fetchCategories();
+  }, []);
+
   return (
     <div>
       <div>
@@ -10,6 +32,13 @@ function Home() {
           {/* Etiqueta e campo de entrada */}
           <label htmlFor="search">Digite algum termo de pesquisa:</label>
           <input type="text" id="search" name="searchTerm" />
+          <ul>
+            {categories.map((category) => (
+              <li key={ category.id } data-testid="category">
+                <Link to={ `/search?category=${category.id}` }>{category.name}</Link>
+              </li>
+            ))}
+          </ul>
 
           {/* Botão de envio */}
           <button
