@@ -35,6 +35,7 @@ function Home() {
     setIsSearchEmpty(false);
     const searchResult = await getProductsFromSearch(searchInputValue);
     setProductList(searchResult);
+    console.log(searchResult);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +89,7 @@ function Home() {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) : (
-          <ProductList productList={ productList } />
+          <ProductList />
         )}
       </div>
       {/* Botão/Link de carrinho de compras */}
