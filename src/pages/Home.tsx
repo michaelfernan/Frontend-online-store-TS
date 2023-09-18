@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import ProductList from '../components/ProductList';
+import { getProductsFromSearch, getCategories } from '../services/api';
 
 import SearchIcon from '../Images/SearchIcon';
 import CartIcon from '../Images/CartIcon';
-import { getCategories } from '../services/api';
 
 type Category = {
   id: string;
@@ -29,8 +29,18 @@ function Home() {
 
   const [searchInputValue, setSearchInputValue] = useState('');
   const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+  const [productList, setProductList] = useState([]);
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    setIsSearchEmpty(false);
+    const searchResult = await getProductsFromSearch(searchInputValue);
+    setProductList(searchResult);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchInputValue(value);
+  };
 
   return (
     <div>
@@ -40,6 +50,7 @@ function Home() {
           <label htmlFor="search">
             <input
 
+              onChange={ handleChange }
               type="text"
               id="search"
               name="searchTerm"
@@ -77,7 +88,7 @@ function Home() {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) : (
-          <ProductList toBeQueried={ searchInputValue } />
+          <ProductList productList={ productList } />
         )}
       </div>
       {/* Botão/Link de carrinho de compras */}
