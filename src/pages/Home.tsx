@@ -1,5 +1,7 @@
-import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import ProductList from '../components/ProductList';
+
 import SearchIcon from '../Images/SearchIcon';
 import CartIcon from '../Images/CartIcon';
 import { getCategories } from '../services/api';
@@ -25,13 +27,25 @@ function Home() {
     fetchCategories();
   }, []);
 
+  const [searchInputValue, setSearchInputValue] = useState('');
+  const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+
+  const handleSubmit = () => {};
+
   return (
     <div>
       <div>
         <form>
           {/* Etiqueta e campo de entrada */}
-          <label htmlFor="search">Digite algum termo de pesquisa:</label>
-          <input type="text" id="search" name="searchTerm" />
+          <label htmlFor="search">
+            <input
+
+              type="text"
+              id="search"
+              name="searchTerm"
+              value={ searchInputValue }
+            />
+          </label>
           <ul>
             {categories.map((category) => (
               <li key={ category.id } data-testid="category">
@@ -46,13 +60,25 @@ function Home() {
           >
             <SearchIcon />
           </button>
+          <button
+            data-testid="query-button"
+            type="submit"
+            onClick={ handleSubmit }
+          >
+            Pesquisar
+
+          </button>
         </form>
       </div>
       <div>
-        {/* Mensagem inicial */}
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+        {isSearchEmpty ? (
+        /* Mensagem inicial */
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        ) : (
+          <ProductList toBeQueried={ searchInputValue } />
+        )}
       </div>
       {/* Botão/Link de carrinho de compras */}
       <NavLink

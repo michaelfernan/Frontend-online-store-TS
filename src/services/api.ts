@@ -23,6 +23,13 @@ Promise<any> {
   }
 }
 
+export async function getProductsFromSearch(searchedTerm:string) {
+  const response = await fetch(`${MERCADO_LIVRE_API_BASE_URL}/
+  sites/MLB/search?q=${searchedTerm}`);
+  const data = await response.json();
+  return data;
+}
+
 export async function getProductById() {
   // Esta implementação específica não é avaliada, mas pode ajudar você 🙂
   // Atenção: essa função não deverá ser chamada na tela do carrinho de compras.
