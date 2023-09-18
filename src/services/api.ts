@@ -23,11 +23,15 @@ Promise<any> {
   }
 }
 
-export async function getProductsFromSearch(searchedTerm:string) {
-  const response = await fetch(`${MERCADO_LIVRE_API_BASE_URL}/
-  sites/MLB/search?q=${searchedTerm}`);
-  const data = await response.json();
-  return data;
+export async function getProductsFromSearch(query:string) {
+  try {
+    const response = await fetch(`${MERCADO_LIVRE_API_BASE_URL}/
+    sites/MLB/search?q=${query}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch products: ${error.message}`);
+  }
 }
 
 export async function getProductById() {
