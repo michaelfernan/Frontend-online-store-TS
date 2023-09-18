@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { BackIcon } from '../__mocks__/IconsSgv';
+import BackIcon from '../Images/BackIcon';
 
 function CartList() {
   return (

@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { CartIcon, SearchIcon } from '../__mocks__/IconsSgv';
+import SearchIcon from '../Images/SearchIcon';
+import CartIcon from '../Images/CartIcon';
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
             type="button"
           >
             <SearchIcon />
+            
           </button>
         </form>
       </div>
