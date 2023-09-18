@@ -16,7 +16,6 @@ function Home() {
             type="button"
           >
             <SearchIcon />
-            
           </button>
         </form>
       </div>
