@@ -31,11 +31,11 @@ function Home() {
   const [isSearchEmpty, setIsSearchEmpty] = useState(true);
   const [productList, setProductList] = useState([]);
 
-  const handleSubmit = async () => {
-    setIsSearchEmpty(false);
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
     const searchResult = await getProductsFromSearch(searchInputValue);
-    setProductList(searchResult);
-    console.log(searchResult);
+    setIsSearchEmpty(false);
+    setProductList(searchResult.results);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +89,7 @@ function Home() {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) : (
-          <ProductList />
+          <ProductList productList={ productList } />
         )}
       </div>
       {/* Botão/Link de carrinho de compras */}

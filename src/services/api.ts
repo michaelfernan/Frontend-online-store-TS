@@ -14,8 +14,9 @@ export async function getCategories(): Promise<any[]> {
 export async function getProductsFromCategoryAndQuery(categoryId: string, query: string):
 Promise<any> {
   try {
-    const response = await fetch(`${MERCADO_LIVRE_API_BASE_URL}/
-      sites/MLB/search?category=${categoryId}&q=${query}`);
+    const response = await fetch(
+      `${MERCADO_LIVRE_API_BASE_URL}/sites/MLB/search?category=${categoryId}&q=${query}`,
+    );
     const data = await response.json();
     return data;
   } catch (error: any) {
@@ -25,8 +26,8 @@ Promise<any> {
 
 export async function getProductsFromSearch(query:string) {
   try {
-    const response = await fetch(`${MERCADO_LIVRE_API_BASE_URL}/
-    sites/MLB/search?q=${query}`);
+    const response = await
+    fetch(`${MERCADO_LIVRE_API_BASE_URL}/sites/MLB/search?q=${query}`);
     const data = await response.json();
     return data;
   } catch (error: any) {

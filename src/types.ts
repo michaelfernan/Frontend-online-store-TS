@@ -1,5 +1,9 @@
 export type ProductCardTypes = {
   productName: string,
   imageSrc: string,
-  productPrice: number
+  productPrice: string
+};
+
+export type ProductListTypes = {
+  productList: []
 };
