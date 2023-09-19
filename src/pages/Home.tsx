@@ -1,35 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import ProductList from '../components/ProductList';
 import { getProductsFromSearch, getCategories } from '../services/api';
+import { Category } from '../types';
+import ProductList from '../components/ProductList';
 
 import SearchIcon from '../Images/SearchIcon';
 import CartIcon from '../Images/CartIcon';
 
-type Category = {
-  id: string;
-  name: string;
-};
-
-function Home() {
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const data = await getCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error('Erro ao buscar categorias:', error);
-      }
-    }
-
-    fetchCategories();
-  }, []);
-
+export default function Home() {
   const [searchInputValue, setSearchInputValue] = useState('');
   const [isSearchEmpty, setIsSearchEmpty] = useState(true);
   const [productList, setProductList] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -44,6 +26,19 @@ function Home() {
     setSearchInputValue(value);
   };
 
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error('Erro ao buscar categorias:', error);
+      }
+    }
+
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <header>
@@ -51,6 +46,7 @@ function Home() {
           {/* Etiqueta e campo de entrada */}
           <label htmlFor="search">
             <input
+              data-testid="query-input"
               onChange={ handleChange }
               type="text"
               id="search"
@@ -58,6 +54,7 @@ function Home() {
               value={ searchInputValue }
             />
           </label>
+
           {/* Botão de envio */}
           <button
             data-testid="query-button"
@@ -105,10 +102,6 @@ function Home() {
           <ProductList productList={ productList } />
         )}
       </main>
-      {/* Botão/Link de carrinho de compras */}
-
     </>
   );
 }
-
-export default Home;
