@@ -5,12 +5,10 @@ import CartList from './pages/CartList';
 
 function App() {
   return (
-
     <Routes>
       <Route path="/" element={ <Home /> } />
       <Route path="/cart" element={ <CartList /> } />
     </Routes>
-
   );
 }
 
