@@ -14,3 +14,8 @@ export type ProductTypes = {
 export type ProductListTypes = {
   productList: ProductTypes[]
 };
+
+export type Category = {
+  id: string;
+  name: string;
+};
