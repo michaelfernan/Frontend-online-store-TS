@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getCategories } from '../services/api';
 import { Category } from '../types';
 
 export default function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -17,16 +19,25 @@ export default function Categories() {
 
     fetchCategories();
   }, []);
+
+  const handleClick = (categoryId: string) => {
+    navigate(`category/${categoryId}`);
+  };
+
   return (
     <aside>
       <h2>Categorias</h2>
-      <ul>
-        {categories.map((category) => (
-          <li key={ category.id } data-testid="category">
-            <Link to={ `/search?category=${category.id}` }>{category.name}</Link>
-          </li>
-        ))}
-      </ul>
+
+      {categories.map((category) => (
+        <button
+          key={ category.id }
+          data-testid="category"
+          onClick={ () => handleClick(category.id) }
+        >
+          {category.name}
+        </button>
+      ))}
+
     </aside>
   );
 }

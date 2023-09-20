@@ -11,6 +11,7 @@ function App() {
       <Route element={ <Layout /> }>
         <Route path="/" element={ <Home /> } />
         <Route path="search/:query" element={ <ProductList /> } />
+        <Route path="category/:id" element={ <ProductList /> } />
       </Route>
 
       <Route path="/cart" element={ <CartList /> } />
