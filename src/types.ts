@@ -1,7 +1,8 @@
 export type ProductCardTypes = {
   productName: string,
   imageSrc: string,
-  productPrice: string
+  productPrice: string,
+  productId: string
 };
 
 export type ProductTypes = {

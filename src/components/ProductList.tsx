@@ -35,6 +35,7 @@ export default function ProductList() {
             productName={ title }
             imageSrc={ thumbnail }
             productPrice={ `R$ ${price}` }
+            productId={ id }
           />
         );
       })}
