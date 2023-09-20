@@ -1,10 +1,24 @@
-import { ProductListTypes } from '../types';
-import ProductCard from './ProductCard';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-export default function ProductList({ productList }: ProductListTypes) {
+import ProductCard from './ProductCard';
+import { getProductsFromSearch } from '../services/api';
+
+export default function ProductList() {
+  const [productList, setProductList] = useState([]);
+  const params = useParams();
+
+  useEffect(() => {
+    async function getSearchResult() {
+      const searchResult = await getProductsFromSearch(params.query);
+      setProductList(searchResult.results);
+    }
+
+    getSearchResult();
+  });
+
   return (
     <div>
-      <h1> Lista de Produtos</h1>
       {productList.map(({ id, title, thumbnail, price }) => {
         return (
           <ProductCard
