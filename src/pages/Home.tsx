@@ -20,7 +20,6 @@ export default function Home() {
     const products = await getProductsFromCategory(id);
     setIsSearchEmpty(false);
     setProductList(products.results);
-    console.log('chamou');
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
