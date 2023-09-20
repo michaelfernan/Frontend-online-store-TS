@@ -40,7 +40,7 @@ export async function getProductById() {
   // Atenção: essa função não deverá ser chamada na tela do carrinho de compras.
 }
 
-export async function getProductsFromCategory(categoryId: string):
+export async function getProductsFromCategory(categoryId?: string):
 Promise<any> {
   try {
     const response = await fetch(

@@ -2,31 +2,29 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import ProductCard from './ProductCard';
-import { getProductsFromSearch } from '../services/api';
+import { getProductsFromCategory, getProductsFromSearch } from '../services/api';
 
 export default function ProductList() {
   const [productList, setProductList] = useState([]);
   const params = useParams();
 
-  if (params.query) {
-    useEffect(() => {
-      async function getSearchResult() {
+  useEffect(() => {
+    if (params.query) {
+      const getSearchResult = async () => {
         const searchResult = await getProductsFromSearch(params.query);
         setProductList(searchResult.results);
-      }
+      };
 
       getSearchResult();
-    });
-  } else {
-    useEffect(() => {
-      async function getSearchResult() {
-        const searchResult = await getProductsFromSearch(params.query);
-        setProductList(searchResult.results);
-      }
+    } else if (params.category) {
+      const onCategoryFilter = async () => {
+        const products = await getProductsFromCategory(params.category);
+        setProductList(products.results);
+      };
 
-      getSearchResult();
-    });
-  }
+      onCategoryFilter();
+    }
+  });
 
   return (
     <div>
