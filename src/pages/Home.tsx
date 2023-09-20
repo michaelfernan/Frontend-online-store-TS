@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { getProductsFromSearch, getCategories } from '../services/api';
+import { NavLink } from 'react-router-dom';
+import { getProductsFromSearch,
+  getCategories, getProductsFromCategory } from '../services/api';
 import { Category } from '../types';
 import ProductList from '../components/ProductList';
 
@@ -12,6 +13,14 @@ export default function Home() {
   const [isSearchEmpty, setIsSearchEmpty] = useState(true);
   const [productList, setProductList] = useState([]);
   const [categories, setCategories] = useState<Category[]>([]);
+
+  const onCategoryFilter = async (
+    id: string,
+  ) => {
+    const products = await getProductsFromCategory(id);
+    setIsSearchEmpty(false);
+    setProductList(products.results);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -80,13 +89,18 @@ export default function Home() {
 
       <aside>
         <h2>Categorias</h2>
-        <ul>
-          {categories.map((category) => (
-            <li key={ category.id } data-testid="category">
-              <Link to={ `/search?category=${category.id}` }>{category.name}</Link>
-            </li>
-          ))}
-        </ul>
+        {categories.map((category) => (
+          <button
+            key={ category.id }
+            data-testid="category"
+            type="button"
+            id={ category.id }
+            name="cat"
+            onClick={ () => onCategoryFilter(category.id) }
+          >
+            {category.name}
+          </button>
+        ))}
       </aside>
 
       <main>
