@@ -11,10 +11,6 @@ export type ProductTypes = {
   price: number
 };
 
-export type ProductListTypes = {
-  productList: ProductTypes[]
-};
-
 export type Category = {
   id: string;
   name: string;

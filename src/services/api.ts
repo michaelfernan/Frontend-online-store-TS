@@ -24,7 +24,7 @@ Promise<any> {
   }
 }
 
-export async function getProductsFromSearch(query:string) {
+export async function getProductsFromSearch(query?:string) {
   try {
     const response = await
     fetch(`${MERCADO_LIVRE_API_BASE_URL}/sites/MLB/search?q=${query}`);
@@ -40,7 +40,7 @@ export async function getProductById() {
   // Atenção: essa função não deverá ser chamada na tela do carrinho de compras.
 }
 
-export async function getProductsFromCategory(categoryId: string):
+export async function getProductsFromCategory(categoryId?: string):
 Promise<any> {
   try {
     const response = await fetch(
