@@ -35,9 +35,15 @@ export async function getProductsFromSearch(query?:string) {
   }
 }
 
-export async function getProductById() {
-  // Esta implementação específica não é avaliada, mas pode ajudar você 🙂
-  // Atenção: essa função não deverá ser chamada na tela do carrinho de compras.
+export async function getProductById(ProductId?:string) {
+  try {
+    const response = await
+    fetch(`${MERCADO_LIVRE_API_BASE_URL}/items/${ProductId}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch products: ${error.message}`);
+  }
 }
 
 export async function getProductsFromCategory(categoryId?: string):
