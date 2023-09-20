@@ -8,14 +8,25 @@ export default function ProductList() {
   const [productList, setProductList] = useState([]);
   const params = useParams();
 
-  useEffect(() => {
-    async function getSearchResult() {
-      const searchResult = await getProductsFromSearch(params.query);
-      setProductList(searchResult.results);
-    }
+  if (params.query) {
+    useEffect(() => {
+      async function getSearchResult() {
+        const searchResult = await getProductsFromSearch(params.query);
+        setProductList(searchResult.results);
+      }
 
-    getSearchResult();
-  });
+      getSearchResult();
+    });
+  } else {
+    useEffect(() => {
+      async function getSearchResult() {
+        const searchResult = await getProductsFromSearch(params.query);
+        setProductList(searchResult.results);
+      }
+
+      getSearchResult();
+    });
+  }
 
   return (
     <div>
