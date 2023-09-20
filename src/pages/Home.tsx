@@ -16,9 +16,7 @@ export default function Home() {
 
   const onCategoryFilter = async (
     id: string,
-    e: React.MouseEvent<HTMLElement>,
   ) => {
-    e.preventDefault();
     const products = await getProductsFromCategory(id);
     setIsSearchEmpty(false);
     setProductList(products.results);
