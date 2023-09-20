@@ -89,26 +89,18 @@ export default function Home() {
 
       <aside>
         <h2>Categorias</h2>
-        <ul>
-          {categories.map((category) => (
-            <li
-              key={ category.id }
-              data-testid="category"
-            >
-              {/* <Link to={ `/search?category=${category.id}` }>{category.name}</Link> */}
-              <label data-testid="category" htmlFor={ category.id }>
-                <button
-                  type="button"
-                  id={ category.id }
-                  name="cat"
-                  onClick={ () => onCategoryFilter(category.id) }
-                >
-                  {category.name}
-                </button>
-              </label>
-            </li>
-          ))}
-        </ul>
+        {categories.map((category) => (
+          <button
+            key={ category.id }
+            data-testid="category"
+            type="button"
+            id={ category.id }
+            name="cat"
+            onClick={ () => onCategoryFilter(category.id) }
+          >
+            {category.name}
+          </button>
+        ))}
       </aside>
 
       <main>
