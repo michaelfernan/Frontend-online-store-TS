@@ -28,5 +28,6 @@ export type CartItem = {
   id: string,
   title: string,
   price: string,
-  quantity: number
+  quantity: number,
+  thumbnail: string
 };

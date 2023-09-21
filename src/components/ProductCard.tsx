@@ -2,13 +2,9 @@ import { Link } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
 import { ProductCardTypes } from '../types';
 
-type ProductCardProps = ProductCardTypes & {
-  onAddToCart: () => void;
-};
-
 export default function ProductCard({
   productName, imageSrc, productPrice, productId, onAddToCart,
-}: ProductCardProps) {
+}: ProductCardTypes) {
   return (
     <div data-testid="product">
       <Link to={ `/details/${productId}` } data-testid="product-detail-link">
