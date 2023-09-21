@@ -1,7 +1,10 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import CartIcon from '../Images/CartIcon';
-import SearchIcon from '../Images/SearchIcon';
+
+import styles from '../styles/Header.module.css';
+import logo from '../images/logo.png';
+import cart from '../images/cart.png';
+import search from '../images/search.png';
 
 export default function Header() {
   const [searchInputValue, setSearchInputValue] = useState('');
@@ -19,39 +22,33 @@ export default function Header() {
   };
 
   return (
-    <header>
+    <header className={ styles.container }>
       <form>
-        <label htmlFor="search">
-          <input
-            data-testid="query-input"
-            onChange={ handleChange }
-            type="text"
-            id="search"
-            name="searchTerm"
-            value={ searchInputValue }
-          />
-        </label>
+        <input
+          data-testid="query-input"
+          onChange={ handleChange }
+          type="text"
+          id="search"
+          name="searchTerm"
+          value={ searchInputValue }
+          placeholder="Digite o que você busca"
+        />
 
         <button
           data-testid="query-button"
           type="submit"
           onClick={ handleSubmit }
+          className={ styles.searchButton }
         >
-          <SearchIcon />
+          <img src={ search } alt="botão de busca" />
         </button>
       </form>
       <div>
-        <h1>FRONT-END</h1>
-        <h3>online store</h3>
+        <img src={ logo } alt="logo" />
       </div>
-      <NavLink
-        to="/cart"
-        data-testid="shopping-cart-button"
-      >
-        <button type="button">
-          <CartIcon />
-        </button>
-      </NavLink>
+      <Link to="/cart" data-testid="shopping-cart-button">
+        <img src={ cart } alt="carrinho" />
+      </Link>
     </header>
   );
 }
