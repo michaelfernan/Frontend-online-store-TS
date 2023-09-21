@@ -1,6 +1,6 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import SearchIcon from '../Images/SearchIcon';
+
 import styles from '../styles/Header.module.css';
 import logo from '../images/logo.png';
 import cart from '../images/cart.png';
