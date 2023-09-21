@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartItem } from '../types';
+import { CartItem, FormDataTypes } from '../types';
 import { BrStates } from '../services/BRstates';
 
 export default function Checkout() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const [fullnameIpt, setFullnameIpt] = useState<string>('');
-  const [cpfIpt, setCpfIpt] = useState<string>('');
-  const [emailIpt, setEmailIpt] = useState<string>('');
-  const [phoneIpt, setPhoneIpt] = useState<string>('');
-  const [cepIpt, setCepIpt] = useState<string>('');
-  const [addressIpt, setAddressIpt] = useState<string>('');
-  const [complementIpt, setComplementIpt] = useState<string>('');
-  const [numberIpt, setNumberIpt] = useState<string>('');
-  const [cityIpt, setCityIpt] = useState<string>('');
-
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState<FormDataTypes>({
+    fullname: '',
+    email: '',
+    cpf: '',
+    phone: '',
+    cep: '',
+    address: '',
+    complement: '',
+    number: '',
+    city: '',
+  });
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -30,36 +31,13 @@ export default function Checkout() {
     localStorage.clear();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
-    if (id === 'fullname') {
-      setFullnameIpt(value);
-    }
-    if (id === 'email') {
-      setEmailIpt(value);
-    }
-    if (id === 'cpf') {
-      setCpfIpt(value);
-    }
-    if (id === 'cep') {
-      setCepIpt(value);
-    }
-    if (id === 'phone') {
-      setPhoneIpt(value);
-    }
-    if (id === 'address') {
-      setAddressIpt(value);
-    }
-    if (id === 'complement') {
-      setComplementIpt(value);
-    }
-    if (id === 'number') {
-      setNumberIpt(value);
-    }
-    if (id === 'city') {
-      setCityIpt(value);
-    }
-  };
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  }
 
   return (
     <>
@@ -86,7 +64,7 @@ export default function Checkout() {
           data-testid="checkout-fullname"
           onChange={ handleChange }
           id="fullname"
-          value={ fullnameIpt }
+          value={ formData.fullname }
         />
         <input
           type="text"
@@ -94,7 +72,7 @@ export default function Checkout() {
           data-testid="checkout-cpf"
           onChange={ handleChange }
           is="cpf"
-          value={ cpfIpt }
+          value={ formData.cpf }
         />
         <input
           type="email"
@@ -102,29 +80,53 @@ export default function Checkout() {
           data-testid="checkout-email"
           onChange={ handleChange }
           id="email"
-          value={ emailIpt }
+          value={ formData.email }
         />
         <input
           type="text"
           placeholder="Telefone"
           data-testid="checkout-phone"
           onChange={ handleChange }
+          id="phone"
+          value={ formData.phone }
         />
         <input
           type="text"
           placeholder="CEP"
           data-testid="checkout-cep"
           onChange={ handleChange }
+          id="cep"
+          value={ formData.cep }
         />
         <input
           type="text"
           placeholder="Endereço"
           data-testid="checkout-address"
           onChange={ handleChange }
+          id="address"
+          value={ formData.address }
         />
-        <input type="text" placeholder="Complemento" onChange={ handleChange } />
-        <input type="text" placeholder="Número" onChange={ handleChange } />
-        <input type="text" placeholder="Cidade" onChange={ handleChange } />
+        <input
+          type="text"
+          placeholder="Complemento"
+          onChange={ handleChange }
+          id="complement"
+          value={ formData.complement }
+        />
+        <input
+          type="text"
+          placeholder="Número"
+          onChange={ handleChange }
+          id="number"
+          value={ formData.number }
+        />
+        <input
+          type="text"
+          placeholder="Cidade"
+          onChange={ handleChange }
+          id="city"
+          value={ formData.city }
+        />
 
         <select>
           <option value="Estado">Estado</option>

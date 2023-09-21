@@ -31,3 +31,15 @@ export type CartItem = {
   quantity: number,
   thumbnail: string
 };
+
+export type FormDataTypes = {
+  fullname: string,
+  email: string,
+  cpf: string,
+  phone: string,
+  cep: string,
+  address: string,
+  complement: string,
+  number: string,
+  city: string,
+};
