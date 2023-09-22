@@ -3,7 +3,7 @@ import './App.css';
 import Home from './pages/Home';
 import CartList from './pages/CartList';
 import Layout from './components/Layout';
-import ProductList from './components/ProductList';
+import ProductList from './pages/ProductList';
 import DetailsProduct from './pages/DetailsProduct';
 import Checkout from './pages/Checkout';
 
