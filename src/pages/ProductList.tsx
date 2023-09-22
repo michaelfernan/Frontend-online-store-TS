@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
+import ProductCard from '../components/ProductCard';
 import { getProductsFromCategory, getProductsFromSearch } from '../services/api';
 import { Product, Params } from '../types';
 
