@@ -32,6 +32,10 @@ export type CartItem = {
   thumbnail: string
 };
 
+export type CartTotalTypes = {
+  cartItems: CartItem[];
+};
+
 export type FormDataTypes = {
   fullname: string,
   email: string,
@@ -39,9 +43,9 @@ export type FormDataTypes = {
   phone: string,
   cep: string,
   address: string,
-  complement: string,
-  number: string,
-  city: string,
-  state: string,
   payment: string
+  // complement: string,
+  // number: string,
+  // city: string,
+  // state: string,
 };

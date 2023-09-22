@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartItem, FormDataTypes } from '../types';
-import { BrStates } from '../services/BRstates';
+import CartTotal from '../components/CartTotal';
+// import { BrStates } from '../services/BRstates';
 
 export default function Checkout() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [error, setError] = useState(false);
-  const [cartTotal, setCartTotal] = useState<number>(0);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCartItems(storedCart);
-    console.log(cartItems);
   }, []);
-
-  useEffect(() => {
-    const total = cartItems.reduce((acc, item) => {
-      const itemPrice = parseFloat(item.price);
-      return (!Number.isNaN(itemPrice) && !Number.isNaN(item.quantity))
-        ? acc + itemPrice * item.quantity
-        : acc;
-    }, 0);
-    setCartTotal(total);
-  }, [cartItems]);
 
   const [formData, setFormData] = useState<FormDataTypes>({
     fullname: '',
@@ -32,11 +21,11 @@ export default function Checkout() {
     phone: '',
     cep: '',
     address: '',
+    payment: '',
     // complement: '',
     // number: '',
     // city: '',
     // state: '',
-    payment: '',
   });
 
   function handleChange(
@@ -80,7 +69,7 @@ export default function Checkout() {
             </div>
           );
         })}
-        <span>{`Total R$ ${cartTotal}`}</span>
+        <CartTotal cartItems={ cartItems } />
       </div>
 
       <form>

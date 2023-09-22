@@ -2,26 +2,16 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import BackIcon from '../Images/BackIcon';
 import { CartItem } from '../types';
+import CartTotal from '../components/CartTotal';
 
 function CartList() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [cartTotal, setCartTotal] = useState<number>(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCartItems(storedCart);
   }, []);
-
-  useEffect(() => {
-    const total = cartItems.reduce((acc, item) => {
-      const itemPrice = parseFloat(item.price);
-      return (!Number.isNaN(itemPrice) && !Number.isNaN(item.quantity))
-        ? acc + itemPrice * item.quantity
-        : acc;
-    }, 0);
-    setCartTotal(total);
-  }, [cartItems]);
 
   const updateLocalStorage = (updatedCart: CartItem[]) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -106,11 +96,7 @@ function CartList() {
       )}
       {cartItems.length > 0 && (
         <div>
-          <p>
-            Total: R$
-            {' '}
-            {cartTotal.toFixed(2)}
-          </p>
+          <CartTotal cartItems={ cartItems } />
           <button
             data-testid="checkout-products"
             onClick={ goToCheckout }

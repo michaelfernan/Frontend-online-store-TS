@@ -24,7 +24,7 @@ export default function DetailsProduct() {
       });
     };
     productDetails();
-  }, []);
+  }, [id]);
 
   const handleClick = () => {
     navigate('/cart');
