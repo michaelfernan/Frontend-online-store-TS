@@ -7,11 +7,23 @@ export default function Checkout() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [error, setError] = useState(false);
+  const [cartTotal, setCartTotal] = useState<number>(0);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCartItems(storedCart);
+    console.log(cartItems);
   }, []);
+
+  useEffect(() => {
+    const total = cartItems.reduce((acc, item) => {
+      const itemPrice = parseFloat(item.price);
+      return (!Number.isNaN(itemPrice) && !Number.isNaN(item.quantity))
+        ? acc + itemPrice * item.quantity
+        : acc;
+    }, 0);
+    setCartTotal(total);
+  }, [cartItems]);
 
   const [formData, setFormData] = useState<FormDataTypes>({
     fullname: '',
@@ -20,10 +32,10 @@ export default function Checkout() {
     phone: '',
     cep: '',
     address: '',
-    complement: '',
-    number: '',
-    city: '',
-    state: '',
+    // complement: '',
+    // number: '',
+    // city: '',
+    // state: '',
     payment: '',
   });
 
@@ -45,15 +57,13 @@ export default function Checkout() {
 
   const handleClick = () => {
     if (isFormValid) {
-      navigate('/');
       localStorage.clear();
+      navigate('/');
       console.log(formData);
     } else {
       setError(true);
     }
   };
-
-  const total = 100;
 
   return (
     <>
@@ -70,7 +80,7 @@ export default function Checkout() {
             </div>
           );
         })}
-        <span>{`Total R$ ${total},00`}</span>
+        <span>{`Total R$ ${cartTotal}`}</span>
       </div>
 
       <form>
@@ -131,7 +141,7 @@ export default function Checkout() {
             name="address"
             value={ formData.address }
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Complemento"
             onChange={ handleChange }
@@ -167,7 +177,7 @@ export default function Checkout() {
                 <option value={ state } key={ state }>{state}</option>
               );
             })}
-          </select>
+          </select> */}
         </div>
         <div>
           <h2>Método de Pagamento</h2>
