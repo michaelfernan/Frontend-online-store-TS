@@ -53,7 +53,7 @@ export default function ProductList() {
   };
 
   return (
-    <div>
+    <main>
       <Categories />
       {productList.map(({ id, title, thumbnail, price }) => (
         <ProductCard
@@ -71,6 +71,6 @@ export default function ProductList() {
           }) }
         />
       ))}
-    </div>
+    </main>
   );
 }

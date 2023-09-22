@@ -36,3 +36,7 @@ button {
 button:hover {
   background-color: var(--green-700);
 }
+
+main {
+  display: flex;
+}
