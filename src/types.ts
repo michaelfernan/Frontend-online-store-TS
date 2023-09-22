@@ -42,4 +42,6 @@ export type FormDataTypes = {
   complement: string,
   number: string,
   city: string,
+  state: string,
+  payment: string
 };
