@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartItem, FormDataTypes } from '../types';
 import CartTotal from '../components/CartTotal';
-// import { BrStates } from '../services/BRstates';
+import { BrStates } from '../services/BRstates';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -22,10 +22,6 @@ export default function Checkout() {
     cep: '',
     address: '',
     payment: '',
-    // complement: '',
-    // number: '',
-    // city: '',
-    // state: '',
   });
 
   function handleChange(
@@ -130,13 +126,12 @@ export default function Checkout() {
             name="address"
             value={ formData.address }
           />
-          {/* <input
+          <input
             type="text"
             placeholder="Complemento"
             onChange={ handleChange }
             id="complement"
             name="complement"
-            value={ formData.complement }
           />
           <input
             type="text"
@@ -144,7 +139,6 @@ export default function Checkout() {
             onChange={ handleChange }
             id="number"
             name="number"
-            value={ formData.number }
           />
           <input
             type="text"
@@ -152,10 +146,8 @@ export default function Checkout() {
             onChange={ handleChange }
             id="city"
             name="city"
-            value={ formData.city }
           />
           <select
-            value={ formData.state }
             id="state"
             name="state"
             onChange={ handleChange }
@@ -166,7 +158,7 @@ export default function Checkout() {
                 <option value={ state } key={ state }>{state}</option>
               );
             })}
-          </select> */}
+          </select>
         </div>
         <div>
           <h2>Método de Pagamento</h2>
