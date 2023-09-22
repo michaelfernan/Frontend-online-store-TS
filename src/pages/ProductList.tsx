@@ -53,8 +53,7 @@ export default function ProductList() {
   };
 
   return (
-    <main>
-      <Categories />
+    <div>
       {productList.map(({ id, title, thumbnail, price }) => (
         <ProductCard
           key={ id }
@@ -71,6 +70,6 @@ export default function ProductList() {
           }) }
         />
       ))}
-    </main>
+    </div>
   );
 }

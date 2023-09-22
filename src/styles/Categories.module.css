@@ -27,7 +27,7 @@ div {
   flex-direction: column;
 }
 
-button {
+aside button {
   background-color: var(--white);
   color: var(--grey-700);
   font-weight: 400;
@@ -35,7 +35,7 @@ button {
   width: fit-content;
 }
 
-button:hover {
+aside button:hover {
   background-color: var(--white);
   color: var(--green-700);
 }
