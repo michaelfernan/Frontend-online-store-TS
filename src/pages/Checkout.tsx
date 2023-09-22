@@ -35,6 +35,7 @@ export default function Checkout() {
       ...formData,
       [name]: value,
     });
+    setError(false);
   }
 
   const values = Object.values(formData);
