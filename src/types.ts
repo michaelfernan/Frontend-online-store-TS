@@ -28,5 +28,24 @@ export type CartItem = {
   id: string,
   title: string,
   price: string,
-  quantity: number
+  quantity: number,
+  thumbnail: string
+};
+
+export type CartTotalTypes = {
+  cartItems: CartItem[];
+};
+
+export type FormDataTypes = {
+  fullname: string,
+  email: string,
+  cpf: string,
+  phone: string,
+  cep: string,
+  address: string,
+  payment: string
+  // complement: string,
+  // number: string,
+  // city: string,
+  // state: string,
 };

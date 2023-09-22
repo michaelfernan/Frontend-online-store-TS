@@ -24,7 +24,7 @@ export default function DetailsProduct() {
       });
     };
     productDetails();
-  }, []);
+  }, [id]);
 
   const handleClick = () => {
     navigate('/cart');
@@ -71,7 +71,6 @@ export default function DetailsProduct() {
       </button>
 
       <button
-        data-testid="shopping-cart-button"
         onClick={ handleClick }
       >
         Carrinho de compras
