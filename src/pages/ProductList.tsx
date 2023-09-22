@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { getProductsFromCategory, getProductsFromSearch } from '../services/api';
 import { Product, Params } from '../types';
-import Categories from '../components/Categories';
 
 export default function ProductList() {
   const [productList, setProductList] = useState<Product[]>([]);
